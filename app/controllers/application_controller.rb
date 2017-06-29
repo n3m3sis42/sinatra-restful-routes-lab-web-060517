@@ -27,7 +27,7 @@ class ApplicationController < Sinatra::Base
 
   patch '/recipes/:id' do
     @recipe = Recipe.find(params[:id])
-    if @recipe.update(params)
+    if @recipe.update(params[:recipe])
       redirect "/recipes/#{@recipe.id}"
     else
       redirect "/recipes/#{@recipe.id}/edit"
@@ -35,7 +35,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/recipes' do
-    @recipe = Recipe.new(params)
+    @recipe = Recipe.new(params[:recipe])
     if @recipe.save
       redirect "/recipes/#{@recipe.id}"
     else
